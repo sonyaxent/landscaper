@@ -5,47 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LANDSCAPER Academy — повний wireframe</title>
   <style>
+    /* === RESET & VARIABLES === */
     *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:Arial,sans-serif;line-height:1.6;}
-    :root{--green:#2F4634;--orange:#C98F55;--dark:#1C1C1C;--light:#f9f9f9;}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px;}
-    /* Buttons */
-    .btn{padding:10px 20px;border-radius:4px;cursor:pointer;border:none;font-size:16px;}
+    body{font-family:Arial,Helvetica,sans-serif;line-height:1.55;background:#fff;color:#1C1C1C;}
+    :root{--green:#2F4634;--orange:#C98F55;--dark:#1C1C1C;--light:#f9f9f9;--shadow:0 2px 6px rgba(0,0,0,.08);}  
+
+    /* === GLOBAL ELEMENTS === */
+    .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+    h2{font-size:28px;font-weight:700;margin-bottom:24px;}
+    .btn{display:inline-block;padding:10px 24px;border-radius:6px;font-size:16px;cursor:pointer;border:none;transition:.2s;}
     .btn-primary{background:var(--orange);color:#fff;}
-    .btn-outline{background:transparent;color:var(--orange);border:2px solid var(--orange);}
+    .btn-outline{background:transparent;color:var(--orange);border:2px solid var(--orange);}  
     .btn-secondary{background:var(--dark);color:#fff;}
-    /* Navigation */
-    .nav-menu{list-style:none;display:flex;gap:30px;align-items:center;}
-    .nav-menu a{text-decoration:none;color:var(--dark);} .nav-menu a.active{color:var(--orange);font-weight:bold;}
-    /* Grids */
-    .grid-3{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
-    .grid-4{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
-    /* Course & profile cards */
-    .course-card,.profile-card,.project-card{border:1px solid #ddd;border-radius:8px;padding:20px;background:#fff;display:flex;flex-direction:column;gap:10px;}
-    .badge{display:inline-block;background:var(--orange);color:#fff;padding:4px 8px;border-radius:12px;font-size:12px;}
-    /* Dashboard / lesson */
-    .sidebar{width:20%;float:left;background:var(--green);color:#fff;min-height:600px;padding:20px;}
-    .sidebar ul{list-style:none;} .sidebar li{margin-bottom:15px;} .sidebar a{color:#fff;text-decoration:none;}
-    .main{width:80%;float:right;padding:20px;}
-    .progress-bar{background:#ddd;height:20px;border-radius:10px;overflow:hidden;margin:20px 0;}
-    .progress-fill{background:var(--orange);height:100%;width:60%;}
-    .lesson-list{list-style:none;}
-    .lesson-list li{padding:10px;margin-bottom:5px;background:#f5f5f5;border-left:4px solid #ddd;} .lesson-list li.active{border-color:var(--orange);background:#fff;} .lesson-list li.locked{opacity:.5;}
-    .video-placeholder{background:#000;color:#fff;height:300px;display:flex;align-items:center;justify-content:center;border-radius:4px;margin-bottom:20px;}
-    /* Marketplace */
-    .filter-bar{display:flex;gap:20px;margin-bottom:30px;}
-    .filter-bar select,.filter-bar input{padding:10px;border:1px solid #ddd;border-radius:4px;flex:1;}
-    .profile-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-bottom:40px;}
-    .avatar{width:100%;height:140px;background:#eee;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:48px;}
-    .rating{color:var(--orange);} .rating small{color:#666;font-size:12px;}
-    .location{font-size:14px;color:#666;}
-    .project-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
-    .project-card h4{margin-bottom:5px;font-size:18px;color:var(--dark);} .project-card .location{margin-bottom:10px;}
-    @media(max-width:768px){.sidebar,.main{width:100%;float:none;} .filter-bar{flex-direction:column;} }
+    .badge{display:inline-block;background:var(--orange);color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;margin-right:6px;}
+
+    /* NAV */
+    .nav-menu{list-style:none;display:flex;gap:28px;align-items:center;}
+    .nav-menu a{text-decoration:none;color:var(--dark);font-weight:500;}
+    .nav-menu a.active{color:var(--orange);}  
+
+    /* GRIDS */
+    .grid-3{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+    .profile-grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+
+    /* CARDS */
+    .course-card,.profile-card{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;}
+    .avatar{width:100%;height:140px;background:#eaeaea;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:48px;}
+    .rating{color:var(--orange);} .rating small{font-size:12px;color:#666;}
+
+    /* === DASHBOARD POLISHED === */
+    .dashboard{background:var(--light);padding:80px 0;}
+    .dashboard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;}
+    .dashboard-wrapper{display:flex;min-height:520px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}  
+    .sidebar{background:var(--green);color:#fff;width:260px;flex-shrink:0;display:flex;flex-direction:column;padding:32px 24px;}
+    .sidebar h3{font-size:20px;margin-bottom:20px;}
+    .sidebar ul{list-style:none;display:flex;flex-direction:column;gap:18px;}
+    .sidebar a{color:#fff;text-decoration:none;font-size:16px;transition:.2s;}
+    .sidebar a:hover{opacity:.8;}
+    .main{flex:1;background:#fff;padding:48px;}
+    .progress-bar{width:100%;height:14px;background:#e0e0e0;border-radius:8px;overflow:hidden;margin-top:8px;margin-bottom:32px;}
+    .progress-fill{width:60%;height:100%;background:var(--orange);}  
+    .lesson-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:12px;}
+    .lesson-item{padding:14px 16px;border-left:4px solid #ddd;background:#f8f8f8;border-radius:6px;cursor:pointer;transition:.2s;}
+    .lesson-item:hover{background:#f0f0f0;}
+    .lesson-item.active{border-color:var(--orange);background:#fff;}
+    .lesson-item.locked{opacity:.5;cursor:not-allowed;}
+    .video-placeholder{width:100%;height:320px;background:#000;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:24px 0;font-size:22px;}
+
+    /* MARKETPLACE */
+    .filter-bar{display:flex;gap:20px;margin-bottom:30px;flex-wrap:wrap;}
+    .filter-bar select,.filter-bar input{padding:10px;border:1px solid #ddd;border-radius:6px;flex:1;min-width:180px;}
+
+    /* RESPONSIVE */
+    @media(max-width:960px){
+      .dashboard-wrapper{flex-direction:column;}
+      .sidebar{width:100%;flex-direction:row;overflow-x:auto;padding:16px;}
+      .sidebar ul{flex-direction:row;gap:24px;margin:0;}
+      .main{padding:32px 24px;}
+    }
   </style>
 </head>
 <body>
-  <!-- Головна сторінка (залишено без змін) -->
+  <!-- ================= HERO ================= -->
   <section id="homepage">
     <header style="background:#fff;border-bottom:1px solid #ddd;">
       <div class="container" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;">
@@ -63,16 +84,16 @@
     </header>
     <div style="background:var(--green);color:#fff;text-align:center;padding:80px 0;">
       <h2 style="font-size:48px;margin-bottom:20px;">Професійна академія ландшафтного дизайну</h2>
-      <p style="font-size:20px;margin-bottom:40px;">Навчання, спільнота та маркетплейс для ландшафтників</p>
+      <p style="font-size:20px;margin-bottom:40px;">Навчання → Спільнота → Замовлення</p>
       <button class="btn btn-primary">Обрати курс</button>
       <button class="btn btn-outline" style="margin-left:10px;">Дізнатись більше</button>
     </div>
   </section>
 
-  <!-- Курси (скорочено) -->
-  <section id="courses-page" style="padding:60px 0;">
+  <!-- ================= КУРСИ ================= -->
+  <section id="courses-page" style="padding:80px 0;">
     <div class="container">
-      <h2 style="text-align:center;margin-bottom:40px;color:var(--dark);">Курси</h2>
+      <h2 style="text-align:center;color:var(--dark);">Курси</h2>
       <div class="grid-3">
         <div class="course-card"><div style="background:#eee;height:150px;display:flex;align-items:center;justify-content:center;">📐</div><span class="badge">Початковий</span><h3>Основи ландшафту</h3><p>Базові принципи</p><button class="btn btn-primary">Детальніше</button></div>
         <div class="course-card"><div style="background:#eee;height:150px;display:flex;align-items:center;justify-content:center;">🌿</div><span class="badge">Середній</span><h3>Рослинний дизайн</h3><p>Композиції рослин</p><button class="btn btn-primary">Детальніше</button></div>
@@ -81,65 +102,83 @@
     </div>
   </section>
 
-  <!-- Кабінет (скорочено) -->
-  <section id="dashboard" class="clearfix" style="background:var(--light);padding:60px 0;">
+  <!-- ================= DASHBOARD ================= -->
+  <section id="dashboard" class="dashboard">
     <div class="container">
-      <header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><strong>Привіт, Олександр</strong><button class="btn btn-secondary">Вихід</button></header>
-      <aside class="sidebar"><ul><li><a href="#">Мої курси</a></li><li><a href="#">Домашні завдання</a></li><li><a href="#">Повідомлення</a></li><li><a href="#">Налаштування</a></li></ul></aside>
-      <main class="main">
-        <section><h2>Поточний курс</h2><div class="progress-bar"><div class="progress-fill"></div></div></section>
-      </main>
+      <header class="dashboard-header"><strong style="font-size:20px;">Привіт, Олександр</strong><button class="btn btn-secondary">Вихід</button></header>
+      <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+          <h3>Меню</h3>
+          <ul>
+            <li><a href="#">Мої курси</a></li>
+            <li><a href="#">Домашні завдання</a></li>
+            <li><a href="#">Повідомлення</a></li>
+            <li><a href="#">Налаштування</a></li>
+          </ul>
+        </nav>
+        <!-- Main -->
+        <main class="main">
+          <section>
+            <h2>Поточний курс: Основи ландшафтного дизайну</h2>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <div style="display:flex;gap:32px;flex-wrap:wrap;">
+              <div style="flex:1;min-width:220px;">
+                <h3 style="font-size:18px;margin-bottom:8px;">Уроки</h3>
+                <ul class="lesson-list">
+                  <li class="lesson-item active">Вступ та цілі курсу</li>
+                  <li class="lesson-item">Композиційні принципи</li>
+                  <li class="lesson-item locked">Рослини для зон</li>
+                </ul>
+              </div>
+              <div style="flex:2;min-width:300px;">
+                <h3 style="font-size:18px;">Урок: Вступ</h3>
+                <div class="video-placeholder">Відео-плеєр</div>
+                <p><a href="#" style="color:var(--orange);text-decoration:none;">Скачати матеріали PDF</a></p>
+                <form style="margin-top:16px;display:flex;flex-direction:column;gap:12px;max-width:400px;">
+                  <label>Завантажити домашнє завдання:</label>
+                  <input type="file" style="border:1px solid #ccc;padding:10px;border-radius:6px;">
+                  <button class="btn btn-primary" style="align-self:flex-start;">Надіслати</button>
+                </form>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
   </section>
 
-  <!-- Урок (скорочено) -->
-  <section id="lesson" class="clearfix" style="padding:60px 0;">
-    <div class="container"><h2>Урок</h2></div>
+  <!-- ================= LESSON PAGE (placeholder) ================= -->
+  <section id="lesson" style="padding:80px 0;">
+    <div class="container"><h2>Сторінка уроку (у розробці)</h2></div>
   </section>
 
-  <!-- MARKETPLACE: каталог фахівців та проєктів -->
-  <section id="marketplace" style="background:var(--light);padding:60px 0;">
+  <!-- ================= MARKETPLACE ================= -->
+  <section id="marketplace" style="background:var(--light);padding:80px 0;">
     <div class="container">
-      <h2 style="text-align:center;margin-bottom:40px;color:var(--dark);">Маркетплейс — знайди фахівця або проєкт</h2>
-
-      <!-- Пошук та фільтри -->
+      <h2 style="text-align:center;color:var(--dark);">Маркетплейс — знайди фахівця або проєкт</h2>
+      <!-- Filters -->
       <div class="filter-bar">
         <select><option>Послуга: Усі</option><option>Проєктування</option><option>Садіння</option><option>Догляд</option><option>Консультації</option></select>
         <select><option>Регіон: Уся Україна</option><option>Київ</option><option>Львів</option><option>Одеса</option></select>
         <select><option>Сортування: Рейтинг</option><option>Досвід</option><option>Нові</option></select>
-        <input type="search" placeholder="Пошук фахівця або навички…" style="flex:2;">
+        <input type="search" placeholder="Пошук фахівця або навички…" style="flex:2;min-width:220px;">
       </div>
-
-      <!-- Каталог фахівців -->
+      <!-- Specialists -->
       <h3 style="margin:40px 0 20px;color:var(--dark);">Фахівці</h3>
       <div class="profile-grid">
-        <div class="profile-card">
-          <div class="avatar">👩‍🌾</div>
-          <h3>Олена Соловій</h3>
-          <span class="badge">Проєктування</span>
-          <p class="location">Львів • 5 років досвіду</p>
-          <div class="rating">⭐⭐⭐⭐⭐ <small>(15)</small></div>
-          <p>Спеціалізуюсь на садах у середземноморському стилі. Допоможу створити затишний двір.</p>
-          <!-- Telegram-чат: кнопка підключення -->
-          <button class="btn btn-primary">Переглянути профіль</button>
-        </div>
-        <div class="profile-card">
-          <div class="avatar">🧑‍🌾</div>
-          <h3>Ігор Гнатюк</h3>
-          <span class="badge">Догляд</span>
-          <p class="location">Київ • 8 років досвіду</p>
-          <div class="rating">⭐⭐⭐⭐ <small>(22)</small></div>
-          <p>Повний сервіс догляду за газонами та декоративними рослинами.</p>
-          <button class="btn btn-primary">Переглянути профіль</button>
-        </div>
-        <div class="profile-card">
-          <div class="avatar">👨‍🎓</div>
-          <h3>Марія Бойко</h3>
-          <span class="badge">Консультації</span>
-          <p class="location">Онлайн • 3 роки досвіду</p>
-          <div class="rating">⭐⭐⭐⭐⭐ <small>(9)</small></div>
-          <p>Онлайн-лекції та аудит проєктів. Працюю з приватними та комерційними обʼєктами.</p>
-          <button class="btn btn-primary">Переглянути профіль</button>
-        </div>
+        <div class="profile-card"><div class="avatar">👩‍🌾</div><h3>Олена Соловій</h3><span class="badge">Проєктування</span><p class="location">Львів • 5 років досвіду</p><div class="rating">⭐⭐⭐⭐⭐ <small>(15)</small></div><p>Садибний та середземноморський стиль. Допоможу створити затишок.</p><!-- Telegram-чат: кнопка підключення --><button class="btn btn-primary">Переглянути профіль</button></div>
+        <div class="profile-card"><div class="avatar">🧑‍🌾</div><h3>Ігор Гнатюк</h3><span class="badge">Догляд</span><p class="location">Київ • 8 років досвіду</p><div class="rating">⭐⭐⭐⭐ <small>(22)</small></div><p>Повний сервіс догляду за газонами та декоративними рослинами.</p><button class="btn btn-primary">Переглянути профіль</button></div>
+        <div class="profile-card"><div class="avatar">👨‍🎓</div><h3>Марія Бойко</h3><span class="badge">Консультації</span><p class="location">Онлайн • 3 роки досвіду</p><div class="rating">⭐⭐⭐⭐⭐ <small>(9)</small></div><p>Онлайн-аудит проєктів і лекції для початківців.</p><button class="btn btn-primary">Переглянути профіль</button></div>
       </div>
-      <div style="text-align:center;margin-top:20px;"><
+      <!-- Projects placeholder -->
+      <h3 style="margin:40px 0 20px;color:var(--dark);">Оголошення проєктів</h3>
+      <div class="grid-3">
+        <div class="profile-card"><h4>Проєкт дворика у Львові</h4><p class="location">Львів, приватний будинок</p><p>Потрібен дизайн концепції + підбір рослин. Бюджет — 30 000 ₴.</p><button class="btn btn-outline">Відгукнутись</button></div>
+        <div class="profile-card"><h4>Догляд за садом 6 соток</h4><p class="location">Київ, Оболонь</p><p>Щомісячний догляд газону та чагарників. Оплата домовлена.</p><button class="btn btn-outline">Відгукнутись</button></div>
+        <div class="profile-card"><h4>Онлайн-консультація: дренаж</h4><p class="location">Онлайн</p><p>Потрібна порада щодо дренажу на ділянці.</p><button class="btn btn-outline">Відгукнутись</button></div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
