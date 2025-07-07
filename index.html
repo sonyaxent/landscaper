@@ -3,118 +3,673 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LANDSCAPER Academy — повний wireframe</title>
+  <title>LANDSCAPER Academy — професійна освіта</title>
   <style>
     /* === RESET & VARIABLES === */
     *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:Arial,Helvetica,sans-serif;line-height:1.55;background:#fff;color:#1C1C1C;}
-    :root{--green:#2F4634;--orange:#C98F55;--dark:#1C1C1C;--light:#f9f9f9;--shadow:0 2px 6px rgba(0,0,0,.08);}  
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;background:#fff;color:#1C1C1C;}
+    :root{
+      --green:#2F4634;
+      --green-light:#3d5a43;
+      --orange:#C98F55;
+      --orange-light:#d4a470;
+      --dark:#1C1C1C;
+      --light:#f9f9f9;
+      --shadow:0 4px 12px rgba(0,0,0,.08);
+      --shadow-hover:0 8px 24px rgba(0,0,0,.15);
+      --transition:.3s ease;
+    }
 
     /* === GLOBAL ELEMENTS === */
     .container{max-width:1200px;margin:0 auto;padding:0 24px;}
-    h2{font-size:28px;font-weight:700;margin-bottom:24px;}
-    .btn{display:inline-block;padding:10px 24px;border-radius:6px;font-size:16px;cursor:pointer;border:none;transition:.2s;}
-    .btn-primary{background:var(--orange);color:#fff;}
-    .btn-outline{background:transparent;color:var(--orange);border:2px solid var(--orange);}  
-    .btn-secondary{background:var(--dark);color:#fff;}
-    .badge{display:inline-block;background:var(--orange);color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;margin-right:6px;}
+    h2{font-size:28px;font-weight:700;margin-bottom:24px;color:var(--dark);}
+    h3{color:var(--dark);}
+    
+    .btn{
+      display:inline-block;
+      padding:12px 28px;
+      border-radius:8px;
+      font-size:16px;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      transition:var(--transition);
+      text-decoration:none;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .btn::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+      transition:left .5s;
+    }
+    .btn:hover::before{left:100%;}
+    
+    .btn-primary{
+      background:linear-gradient(135deg,var(--orange),var(--orange-light));
+      color:#fff;
+      box-shadow:0 4px 15px rgba(201,143,85,.3);
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(201,143,85,.4);
+    }
+    
+    .btn-outline{
+      background:transparent;
+      color:var(--orange);
+      border:2px solid var(--orange);
+    }
+    .btn-outline:hover{
+      background:var(--orange);
+      color:#fff;
+      transform:translateY(-2px);
+    }
+    
+    .btn-secondary{
+      background:linear-gradient(135deg,var(--dark),#333);
+      color:#fff;
+    }
+    .btn-secondary:hover{
+      background:linear-gradient(135deg,#333,#555);
+      transform:translateY(-2px);
+    }
+    
+    .badge{
+      display:inline-block;
+      background:linear-gradient(135deg,var(--orange),var(--orange-light));
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:11px;
+      font-weight:600;
+      margin-right:8px;
+      letter-spacing:0.5px;
+      text-transform:uppercase;
+    }
+
+    /* === HEADER === */
+    header{
+      background:#fff;
+      border-bottom:1px solid #e5e5e5;
+      box-shadow:var(--shadow);
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .header-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 0;
+    }
+    h1{
+      color:var(--dark);
+      font-size:24px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    h1:hover{color:var(--orange);}
 
     /* NAV */
-    .nav-menu{list-style:none;display:flex;gap:28px;align-items:center;}
-    .nav-menu a{text-decoration:none;color:var(--dark);font-weight:500;}
-    .nav-menu a.active{color:var(--orange);}  
+    .nav-menu{
+      list-style:none;
+      display:flex;
+      gap:32px;
+      align-items:center;
+    }
+    .nav-menu a{
+      text-decoration:none;
+      color:var(--dark);
+      font-weight:500;
+      padding:8px 16px;
+      border-radius:6px;
+      transition:var(--transition);
+      position:relative;
+    }
+    .nav-menu a::after{
+      content:'';
+      position:absolute;
+      bottom:0;
+      left:50%;
+      width:0;
+      height:2px;
+      background:var(--orange);
+      transition:var(--transition);
+      transform:translateX(-50%);
+    }
+    .nav-menu a:hover{
+      color:var(--orange);
+      background:rgba(201,143,85,.1);
+    }
+    .nav-menu a:hover::after{width:80%;}
+    .nav-menu a.active{
+      color:var(--orange);
+      background:rgba(201,143,85,.1);
+    }
+    .nav-menu a.active::after{width:80%;}
 
     /* GRIDS & CARDS */
-    .grid-3{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
-    .profile-grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
-    .course-card,.profile-card{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;}
-    .avatar{width:100%;height:140px;background:#eaeaea;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:48px;}
-    .rating{color:var(--orange);} .rating small{font-size:12px;color:#666;}
+    .grid-3{
+      display:grid;
+      gap:28px;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    }
+    .profile-grid{
+      display:grid;
+      gap:28px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+    
+    .course-card,.profile-card{
+      background:#fff;
+      border:1px solid #e5e5e5;
+      border-radius:16px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      transition:var(--transition);
+      cursor:pointer;
+    }
+    .course-card:hover,.profile-card:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--shadow-hover);
+      border-color:var(--orange);
+    }
+    
+    .course-icon{
+      background:linear-gradient(135deg,#f0f0f0,#e8e8e8);
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:48px;
+      border-radius:12px;
+      margin-bottom:8px;
+    }
+    
+    .avatar{
+      width:100%;
+      height:140px;
+      background:linear-gradient(135deg,#f0f0f0,#e8e8e8);
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:48px;
+      margin-bottom:8px;
+    }
+    
+    .rating{
+      color:var(--orange);
+      font-size:14px;
+    }
+    .rating small{
+      font-size:12px;
+      color:#666;
+      margin-left:4px;
+    }
+    
+    .location{
+      color:#666;
+      font-size:14px;
+      margin:4px 0;
+    }
+
+    /* === HERO SECTION === */
+    .hero{
+      background:linear-gradient(135deg,var(--green),var(--green-light));
+      color:#fff;
+      text-align:center;
+      padding:100px 0;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.03"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.03"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    }
+    .hero h2{
+      font-size:52px;
+      margin-bottom:24px;
+      position:relative;
+      z-index:1;
+      color:#fff;
+    }
+    .hero p{
+      font-size:22px;
+      margin-bottom:48px;
+      position:relative;
+      z-index:1;
+      opacity:0.9;
+    }
+    .hero-buttons{
+      position:relative;
+      z-index:1;
+    }
+    .hero-buttons .btn{
+      margin:0 8px;
+    }
 
     /* DASHBOARD */
-    .dashboard{background:var(--light);padding:80px 0;}
-    .dashboard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;}
-    .dashboard-wrapper{display:flex;min-height:520px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}  
-    .sidebar{background:var(--green);color:#fff;width:260px;flex-shrink:0;display:flex;flex-direction:column;padding:32px 24px;}
-    .sidebar h3{font-size:20px;margin-bottom:20px;}
-    .sidebar ul{list-style:none;display:flex;flex-direction:column;gap:18px;}
-    .sidebar a{color:#fff;text-decoration:none;font-size:16px;transition:.2s;}
-    .sidebar a:hover{opacity:.8;}
-    .main{flex:1;background:#fff;padding:48px;}
-    .progress-bar{width:100%;height:14px;background:#e0e0e0;border-radius:8px;overflow:hidden;margin-top:8px;margin-bottom:32px;}
-    .progress-fill{width:60%;height:100%;background:var(--orange);}  
-    .lesson-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:12px;}
-    .lesson-item{padding:14px 16px;border-left:4px solid #ddd;background:#f8f8f8;border-radius:6px;cursor:pointer;transition:.2s;}
-    .lesson-item:hover{background:#f0f0f0;}
-    .lesson-item.active{border-color:var(--orange);background:#fff;}
-    .lesson-item.locked{opacity:.5;cursor:not-allowed;}
-    .video-placeholder{width:100%;height:320px;background:#000;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:24px 0;font-size:22px;}
+    .dashboard{
+      background:var(--light);
+      padding:80px 0;
+    }
+    .dashboard-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:40px;
+    }
+    .dashboard-wrapper{
+      display:flex;
+      min-height:600px;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:#fff;
+    }
+    
+    .sidebar{
+      background:linear-gradient(180deg,var(--green),var(--green-light));
+      color:#fff;
+      width:280px;
+      flex-shrink:0;
+      display:flex;
+      flex-direction:column;
+      padding:40px 28px;
+    }
+    .sidebar h3{
+      font-size:22px;
+      margin-bottom:28px;
+      color:#fff;
+    }
+    .sidebar ul{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .sidebar a{
+      color:#fff;
+      text-decoration:none;
+      font-size:16px;
+      padding:12px 16px;
+      border-radius:8px;
+      transition:var(--transition);
+      display:block;
+    }
+    .sidebar a:hover{
+      background:rgba(255,255,255,.15);
+      transform:translateX(4px);
+    }
+    
+    .main{
+      flex:1;
+      background:#fff;
+      padding:48px;
+    }
+    
+    .progress-bar{
+      width:100%;
+      height:16px;
+      background:#e8e8e8;
+      border-radius:10px;
+      overflow:hidden;
+      margin:12px 0 40px 0;
+      box-shadow:inset 0 2px 4px rgba(0,0,0,.1);
+    }
+    .progress-fill{
+      width:60%;
+      height:100%;
+      background:linear-gradient(90deg,var(--orange),var(--orange-light));
+      position:relative;
+      overflow:hidden;
+    }
+    .progress-fill::after{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+      animation:shimmer 2s infinite;
+    }
+    @keyframes shimmer{
+      0%{transform:translateX(-100%);}
+      100%{transform:translateX(100%);}
+    }
+    
+    .lesson-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:16px;
+    }
+    .lesson-item{
+      padding:16px 20px;
+      border-left:4px solid #ddd;
+      background:#f8f8f8;
+      border-radius:8px;
+      cursor:pointer;
+      transition:var(--transition);
+    }
+    .lesson-item:hover{
+      background:#f0f0f0;
+      transform:translateX(4px);
+    }
+    .lesson-item.active{
+      border-color:var(--orange);
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+    .lesson-item.locked{
+      opacity:.5;
+      cursor:not-allowed;
+    }
+    
+    .video-placeholder{
+      width:100%;
+      height:320px;
+      background:linear-gradient(135deg,#1a1a1a,#2a2a2a);
+      color:#fff;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:24px 0;
+      font-size:22px;
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+    }
+    .video-placeholder::before{
+      content:'▶';
+      position:absolute;
+      font-size:48px;
+      opacity:0.8;
+      transition:var(--transition);
+    }
+    .video-placeholder:hover::before{
+      opacity:1;
+      transform:scale(1.1);
+    }
 
     /* LESSON PAGE */
-    .lesson{padding:80px 0;}
-    .breadcrumb{font-size:14px;color:#666;margin-bottom:24px;}
-    .lesson-wrapper{display:flex;gap:32px;}
-    .lesson-sidebar{width:260px;background:var(--light);padding:24px;border:1px solid #e5e5e5;border-radius:10px;flex-shrink:0;box-shadow:var(--shadow);}  
-    .lesson-sidebar h3{font-size:18px;margin-bottom:12px;}
-    .lesson-nav{list-style:none;display:flex;flex-direction:column;gap:10px;}
-    .lesson-link{padding:10px;border-left:4px solid #ddd;background:#fff;border-radius:6px;font-size:14px;cursor:pointer;transition:.2s;}
-    .lesson-link:hover{background:#f6f6f6;}
-    .lesson-link.active{border-color:var(--orange);font-weight:600;}
-    .lesson-link.locked{opacity:.5;cursor:not-allowed;}
-    .lesson-content{flex:1;padding:0 8px;}
-    .homework-form{display:flex;flex-direction:column;gap:12px;margin-top:16px;max-width:420px;}
-    .homework-form input{border:1px solid #ccc;padding:10px;border-radius:6px;}
-    .material-link{color:var(--orange);text-decoration:none;}
+    .lesson{
+      padding:80px 0;
+    }
+    .breadcrumb{
+      font-size:14px;
+      color:#666;
+      margin-bottom:28px;
+    }
+    .breadcrumb a{
+      color:var(--orange);
+      text-decoration:none;
+    }
+    .breadcrumb a:hover{
+      text-decoration:underline;
+    }
+    
+    .lesson-wrapper{
+      display:flex;
+      gap:40px;
+    }
+    .lesson-sidebar{
+      width:280px;
+      background:var(--light);
+      padding:28px;
+      border:1px solid #e5e5e5;
+      border-radius:16px;
+      flex-shrink:0;
+      box-shadow:var(--shadow);
+      height:fit-content;
+    }
+    .lesson-sidebar h3{
+      font-size:18px;
+      margin-bottom:20px;
+    }
+    
+    .lesson-nav{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .lesson-link{
+      padding:12px 16px;
+      border-left:4px solid #ddd;
+      background:#fff;
+      border-radius:8px;
+      font-size:14px;
+      cursor:pointer;
+      transition:var(--transition);
+    }
+    .lesson-link:hover{
+      background:#f6f6f6;
+      transform:translateX(4px);
+    }
+    .lesson-link.active{
+      border-color:var(--orange);
+      font-weight:600;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+    .lesson-link.locked{
+      opacity:.5;
+      cursor:not-allowed;
+    }
+    
+    .lesson-content{
+      flex:1;
+      padding:0 8px;
+    }
+    
+    .homework-form{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      margin-top:24px;
+      max-width:500px;
+    }
+    .homework-form input,.homework-form textarea{
+      border:2px solid #e5e5e5;
+      padding:12px;
+      border-radius:8px;
+      transition:var(--transition);
+      font-family:inherit;
+    }
+    .homework-form input:focus,.homework-form textarea:focus{
+      outline:none;
+      border-color:var(--orange);
+      box-shadow:0 0 0 3px rgba(201,143,85,.1);
+    }
+    
+    .material-link{
+      color:var(--orange);
+      text-decoration:none;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:var(--transition);
+    }
+    .material-link:hover{
+      color:var(--orange-light);
+      transform:translateX(4px);
+    }
+    .material-link::before{
+      content:'📄';
+    }
 
-    /* COMMUNITY (ex‑Marketplace) */
-    .filter-bar{display:flex;gap:20px;margin-bottom:30px;flex-wrap:wrap;}
-    .filter-bar select,.filter-bar input{padding:10px;border:1px solid #ddd;border-radius:6px;flex:1;min-width:180px;}
+    /* COMMUNITY */
+    .community{
+      background:var(--light);
+      padding:80px 0;
+    }
+    
+    .filter-bar{
+      display:flex;
+      gap:20px;
+      margin-bottom:40px;
+      flex-wrap:wrap;
+    }
+    .filter-bar select,.filter-bar input{
+      padding:12px 16px;
+      border:2px solid #e5e5e5;
+      border-radius:8px;
+      flex:1;
+      min-width:200px;
+      font-family:inherit;
+      transition:var(--transition);
+    }
+    .filter-bar select:focus,.filter-bar input:focus{
+      outline:none;
+      border-color:var(--orange);
+      box-shadow:0 0 0 3px rgba(201,143,85,.1);
+    }
+    
+    .section-title{
+      margin:48px 0 24px 0;
+      color:var(--dark);
+      font-size:24px;
+    }
 
     /* RESPONSIVE */
     @media(max-width:960px){
-      .dashboard-wrapper{flex-direction:column;}
-      .sidebar{width:100%;flex-direction:row;overflow-x:auto;padding:16px;}
-      .sidebar ul{flex-direction:row;gap:24px;margin:0;}
-      .main{padding:32px 24px;}
-      .lesson-wrapper{flex-direction:column;}
-      .lesson-sidebar{width:100%;display:flex;flex-direction:row;overflow-x:auto;}
-      .lesson-nav{flex-direction:row;gap:20px;}
+      .hero h2{font-size:36px;}
+      .hero p{font-size:18px;}
+      
+      .dashboard-wrapper{
+        flex-direction:column;
+      }
+      .sidebar{
+        width:100%;
+        flex-direction:row;
+        overflow-x:auto;
+        padding:20px;
+      }
+      .sidebar ul{
+        flex-direction:row;
+        gap:24px;
+        margin:0;
+        white-space:nowrap;
+      }
+      .main{
+        padding:32px 24px;
+      }
+      
+      .lesson-wrapper{
+        flex-direction:column;
+      }
+      .lesson-sidebar{
+        width:100%;
+        display:flex;
+        flex-direction:row;
+        overflow-x:auto;
+      }
+      .lesson-nav{
+        flex-direction:row;
+        gap:20px;
+        white-space:nowrap;
+      }
+      
+      .nav-menu{
+        gap:16px;
+      }
+    }
+    
+    @media(max-width:768px){
+      .container{
+        padding:0 16px;
+      }
+      .hero{
+        padding:60px 0;
+      }
+      .hero h2{
+        font-size:32px;
+      }
+      .grid-3{
+        grid-template-columns:1fr;
+      }
+      .profile-grid{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="container header-container">
+      <h1 onclick="scrollToSection('homepage')">LANDSCAPER Academy</h1>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#homepage" onclick="scrollToSection('homepage')" class="active">Головна</a></li>
+          <li><a href="#courses-page" onclick="scrollToSection('courses-page')">Курси</a></li>
+          <li><a href="#dashboard" onclick="scrollToSection('dashboard')">Кабінет</a></li>
+          <li><a href="#lesson" onclick="scrollToSection('lesson')">Урок</a></li>
+          <li><a href="#community" onclick="scrollToSection('community')">Community</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <!-- ================= HERO ================= -->
-  <section id="homepage">
-    <header style="background:#fff;border-bottom:1px solid #ddd;">
-      <div class="container" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;">
-        <h1 style="color:var(--dark);">LANDSCAPER Academy</h1>
-        <nav>
-          <ul class="nav-menu">
-            <li><a href="#homepage" class="active">Головна</a></li>
-            <li><a href="#courses-page">Курси</a></li>
-            <li><a href="#dashboard">Кабінет</a></li>
-            <li><a href="#lesson">Урок</a></li>
-            <li><a href="#community">Community</a></li>
-          </ul>
-        </nav>
+  <section id="homepage" class="hero">
+    <div class="container">
+      <h2>Професійна академія ландшафтного дизайну</h2>
+      <p>Навчання → Спільнота → Замовлення</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="scrollToSection('courses-page')">Обрати курс</button>
+        <button class="btn btn-outline" onclick="scrollToSection('courses-page')">Дізнатись більше</button>
       </div>
-    </header>
-    <div style="background:var(--green);color:#fff;text-align:center;padding:80px 0;">
-      <h2 style="font-size:48px;margin-bottom:20px;">Професійна академія ландшафтного дизайну</h2>
-      <p style="font-size:20px;margin-bottom:40px;">Навчання → Спільнота → Замовлення</p>
-      <button class="btn btn-primary">Обрати курс</button>
-      <button class="btn btn-outline" style="margin-left:10px;">Дізнатись більше</button>
     </div>
   </section>
 
   <!-- ================= КУРСИ ================= -->
   <section id="courses-page" style="padding:80px 0;">
     <div class="container">
-      <h2 style="text-align:center;color:var(--dark);">Курси</h2>
+      <h2 style="text-align:center;">Наші курси</h2>
       <div class="grid-3">
-        <div class="course-card"><div style="background:#eee;height:150px;display:flex;align-items:center;justify-content:center;">📐</div><span class="badge">Початковий</span><h3>Основи ландшафту</h3><p>Базові принципи</p><button class="btn btn-primary">Детальніше</button></div>
-        <div class="course-card"><div style="background:#eee;height:150px;display:flex;align-items:center;justify-content:center;">🌿</div><span class="badge">Середній</span><h3>Рослинний дизайн</h3><p>Композиції рослин</p><button class="btn btn-primary">Детальніше</button></div>
-        <div class="course-card"><div style="background:#eee;height:150px;display:flex;align-items:center;justify-content:center;">🏗️</div><span class="badge">Просунутий</span><h3>Планування простору</h3><p>Зонування територій</p><button class="btn btn-primary">Детальніше</button></div>
+        <div class="course-card">
+          <div class="course-icon">📐</div>
+          <span class="badge">Початковий</span>
+          <h3>Основи ландшафту</h3>
+          <p>Базові принципи планування та проєктування ландшафтних композицій</p>
+          <button class="btn btn-primary">Детальніше</button>
+        </div>
+        <div class="course-card">
+          <div class="course-icon">🌿</div>
+          <span class="badge">Середній</span>
+          <h3>Рослинний дизайн</h3>
+          <p>Мистецтво створення гармонійних рослинних композицій</p>
+          <button class="btn btn-primary">Детальніше</button>
+        </div>
+        <div class="course-card">
+          <div class="course-icon">🏗️</div>
+          <span class="badge">Просунутий</span>
+          <h3>Планування простору</h3>
+          <p>Професійне зонування та організація територій</p>
+          <button class="btn btn-primary">Детальніше</button>
+        </div>
       </div>
     </div>
   </section>
@@ -122,40 +677,48 @@
   <!-- ================= DASHBOARD ================= -->
   <section id="dashboard" class="dashboard">
     <div class="container">
-      <header class="dashboard-header"><strong style="font-size:20px;">Привіт, Олександр</strong><button class="btn btn-secondary">Вихід</button></header>
+      <header class="dashboard-header">
+        <strong style="font-size:24px;">Привіт, Олександр! 👋</strong>
+        <button class="btn btn-secondary">Вихід</button>
+      </header>
       <div class="dashboard-wrapper">
         <!-- Sidebar -->
         <nav class="sidebar">
           <h3>Меню</h3>
           <ul>
-            <li><a href="#">Мої курси</a></li>
-            <li><a href="#">Домашні завдання</a></li>
-            <li><a href="#">Повідомлення</a></li>
-            <li><a href="#">Налаштування</a></li>
+            <li><a href="#" onclick="showSection('my-courses')">📚 Мої курси</a></li>
+            <li><a href="#" onclick="showSection('homework')">📝 Домашні завдання</a></li>
+            <li><a href="#" onclick="showSection('messages')">💬 Повідомлення</a></li>
+            <li><a href="#" onclick="showSection('settings')">⚙️ Налаштування</a></li>
           </ul>
         </nav>
         <!-- Main -->
         <main class="main">
           <section>
             <h2>Поточний курс: Основи ландшафтного дизайну</h2>
-            <div class="progress-bar"><div class="progress-fill"></div></div>
-            <div style="display:flex;gap:32px;flex-wrap:wrap;">
-              <div style="flex:1;min-width:220px;">
-                <h3 style="font-size:18px;margin-bottom:8px;">Уроки</h3>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+            <div style="display:flex;gap:40px;flex-wrap:wrap;">
+              <div style="flex:1;min-width:280px;">
+                <h3 style="font-size:20px;margin-bottom:16px;">Уроки курсу</h3>
                 <ul class="lesson-list">
-                  <li class="lesson-item active">Вступ та цілі курсу</li>
-                  <li class="lesson-item">Композиційні принципи</li>
-                  <li class="lesson-item locked">Рослини для зон</li>
+                  <li class="lesson-item active" onclick="selectLesson(this)">✅ Вступ та цілі курсу</li>
+                  <li class="lesson-item" onclick="selectLesson(this)">🎯 Композиційні принципи</li>
+                  <li class="lesson-item locked">🔒 Рослини для зон</li>
+                  <li class="lesson-item locked">🔒 Фінальний проєкт</li>
                 </ul>
               </div>
-              <div style="flex:2;min-width:300px;">
-                <h3 style="font-size:18px;">Урок: Вступ</h3>
-                <div class="video-placeholder">Відео-плеєр</div>
-                <p><a href="#" style="color:var(--orange);text-decoration:none;">Скачати матеріали PDF</a></p>
-                <form style="margin-top:16px;display:flex;flex-direction:column;gap:12px;max-width:400px;">
-                  <label>Завантажити домашнє завдання:</label>
-                  <input type="file" style="border:1px solid #ccc;padding:10px;border-radius:6px;">
-                  <button class="btn btn-primary" style="align-self:flex-start;">Надіслати</button>
+              <div style="flex:2;min-width:400px;">
+                <h3 style="font-size:20px;margin-bottom:16px;">Урок: Вступ до ландшафтного дизайну</h3>
+                <div class="video-placeholder">
+                  <span>Відео-плеєр</span>
+                </div>
+                <p><a href="#" class="material-link">Скачати матеріали PDF</a></p>
+                <form class="homework-form">
+                  <label style="font-weight:600;">Завантажити домашнє завдання:</label>
+                  <input type="file" accept=".pdf,.doc,.docx,.jpg,.png">
+                  <button class="btn btn-primary">Надіслати</button>
                 </form>
               </div>
             </div>
@@ -165,65 +728,288 @@
     </div>
   </section>
 
-  <!-- ================= LESSON PAGE POLISHED ================= -->
+  <!-- ================= LESSON PAGE ================= -->
   <section id="lesson" class="lesson">
     <div class="container">
-      <nav class="breadcrumb">Курси &gt; Основи ландшафтного дизайну &gt; Урок 2</nav>
+      <nav class="breadcrumb">
+        <a href="#courses-page">Курси</a> › 
+        <a href="#dashboard">Основи ландшафтного дизайну</a> › 
+        <span>Урок 2</span>
+      </nav>
       <div class="lesson-wrapper">
         <!-- Sidebar with lessons -->
         <aside class="lesson-sidebar">
           <h3>Зміст курсу</h3>
           <ul class="lesson-nav">
-            <li class="lesson-link">Урок 1: Вступ</li>
-            <li class="lesson-link active">Урок 2: Композиція</li>
-            <li class="lesson-link">Урок 3: Рослини</li>
-            <li class="lesson-link locked">Урок 4: Фінал</li>
+            <li class="lesson-link" onclick="selectLessonNav(this)">✅ Урок 1: Вступ</li>
+            <li class="lesson-link active" onclick="selectLessonNav(this)">🎯 Урок 2: Композиція</li>
+            <li class="lesson-link" onclick="selectLessonNav(this)">🌿 Урок 3: Рослини</li>
+            <li class="lesson-link locked">🔒 Урок 4: Фінал</li>
           </ul>
-          <!-- Telegram-чат: кнопка підключення -->
-          <button class="btn btn-outline" style="margin-top:24px;">Відкрити чат</button>
+          <button class="btn btn-outline" style="margin-top:28px;">💬 Відкрити чат</button>
         </aside>
         <!-- Lesson content -->
         <div class="lesson-content">
-          <h2>Урок 2: Композиція в ландшафтному дизайні</h2>
-          <div class="video-placeholder">Відео-плеєр</div>
+          <h2>Урок 2: Композиція в ландшафтному дизайні</h2>
+          <div class="video-placeholder">
+            <span>Відео-плеєр</span>
+          </div>
           <p><a href="#" class="material-link">Завантажити презентацію (PDF)</a></p>
-          <h3 style="margin-top:32px;">Домашнє завдання</h3>
-          <p>Проаналізуйте композицію вашої ділянки та запропонуйте три покращення.</p>
+          <h3 style="margin-top:40px;font-size:22px;">Домашнє завдання</h3>
+          <p style="margin-bottom:20px;">Проаналізуйте композицію вашої ділянки та запропонуйте три покращення з обґрунтуванням кожного рішення.</p>
           <form class="homework-form">
-            <label>Додати файл відповіді:</label>
-            <input type="file">
-            <button class="btn btn-primary">Надіслати</button>
+            <label style="font-weight:600;">Додати файл відповіді:</label>
+            <input type="file" accept=".pdf,.doc,.docx,.jpg,.png">
+            <textarea placeholder="Додайте коментар до вашого завдання..." rows="4"></textarea>
+            <button class="btn btn-primary">Надіслати на перевірку</button>
           </form>
         </div>
       </div>
     </div>
   </section>
+
   <!-- ================= COMMUNITY ================= -->
-  <section id="community" style="background:var(--light);padding:80px 0;">
+  <section id="community" class="community">
     <div class="container">
-      <h2 style="text-align:center;color:var(--dark);">Community — знайди фахівця або проєкт</h2>
+      <h2 style="text-align:center;">Community — знайди фахівця або проєкт</h2>
       <!-- Filters -->
       <div class="filter-bar">
-        <select><option>Послуга: Усі</option><option>Проєктування</option><option>Садіння</option><option>Догляд</option><option>Консультації</option></select>
-        <select><option>Регіон: Уся Україна</option><option>Київ</option><option>Львів</option><option>Одеса</option></select>
-        <select><option>Сортування: Рейтинг</option><option>Досвід</option><option>Нові</option></select>
-        <input type="search" placeholder="Пошук фахівця або навички…" style="flex:2;min-width:220px;">
+        <select onchange="filterProfiles()">
+          <option>Послуга: Усі</option>
+          <option>Проєктування</option>
+          <option>Садіння</option>
+          <option>Догляд</option>
+          <option>Консультації</option>
+        </select>
+        <select onchange="filterProfiles()">
+          <option>Регіон: Уся Україна</option>
+          <option>Київ</option>
+          <option>Львів</option>
+          <option>Одеса</option>
+          <option>Харків</option>
+        </select>
+        <select onchange="filterProfiles()">
+          <option>Сортування: Рейтинг</option>
+          <option>Досвід</option>
+          <option>Нові</option>
+          <option>Ціна</option>
+        </select>
+        <input type="search" placeholder="Пошук фахівця або навички…" style="flex:2;min-width:250px;" oninput="searchProfiles()">
       </div>
+      
       <!-- Specialists -->
-      <h3 style="margin:40px 0 20px;color:var(--dark);">Фахівці</h3>
+      <h3 class="section-title">🏆 Топ фахівці</h3>
       <div class="profile-grid">
-        <div class="profile-card"><div class="avatar">👩‍🌾</div><h3>Олена Соловій</h3><span class="badge">Проєктування</span><p class="location">Львів • 5 років досвіду</p><div class="rating">⭐⭐⭐⭐⭐ <small>(15)</small></div><p>Садибний та середземноморський стиль. Допоможу створити затишок.</p><!-- Telegram-чат: кнопка підключення --><button class="btn btn-primary">Переглянути профіль</button></div>
-        <div class="profile-card"><div class="avatar">🧑‍🌾</div><h3>Ігор Гнатюк</h3><span class="badge">Догляд</span><p class="location">Київ • 8 років досвіду</p><div class="rating">⭐⭐⭐⭐ <small>(22)</small></div><p>Повний сервіс догляду за газонами та декоративними рослинами.</p><button class="btn btn-primary">Переглянути профіль</button></div>
-        <div class="profile-card"><div class="avatar">👨‍🎓</div><h3>Марія Бойко</h3><span class="badge">Консультації</span><p class="location">Онлайн • 3 роки досвіду</p><div class="rating">⭐⭐⭐⭐⭐ <small>(9)</small></div><p>Онлайн-аудит проєктів і лекції для початківців.</p><button class="btn btn-primary">Переглянути профіль</button></div>
+        <div class="profile-card">
+          <div class="avatar">👩‍🌾</div>
+          <h3>Олена Соловій</h3>
+          <span class="badge">Проєктування</span>
+          <p class="location">📍 Львів • 5 років досвіду</p>
+          <div class="rating">⭐⭐⭐⭐⭐ <small>(15 відгуків)</small></div>
+          <p>Садибний та середземноморський стиль. Допоможу створити затишний простір для вашої родини.</p>
+          <button class="btn btn-primary">Переглянути профіль</button>
+        </div>
+        <div class="profile-card">
+          <div class="avatar">👨‍🎓</div>
+          <h3>Марія Бойко</h3>
+          <span class="badge">Консультації</span>
+          <p class="location">📍 Онлайн • 3 роки досвіду</p>
+          <div class="rating">⭐⭐⭐⭐⭐ <small>(9 відгуків)</small></div>
+          <p>Онлайн-аудит проєктів і персональні лекції для початківців. Швидкі консультації.</p>
+          <button class="btn btn-primary">Переглянути профіль</button>
+        </div>
+        <div class="profile-card">
+          <div class="avatar">🧑‍🌾</div>
+          <h3>Ігор Гнатюк</h3>
+          <span class="badge">Догляд</span>
+          <p class="location">📍 Київ • 8 років досвіду</p>
+          <div class="rating">⭐⭐⭐⭐ <small>(22 відгуки)</small></div>
+          <p>Повний сервіс догляду за газонами та декоративними рослинами. Консультації онлайн.</p>
+          <button class="btn btn-primary">Переглянути профіль</button>
+          </div>
       </div>
-      <!-- Projects placeholder -->
-      <h3 style="margin:40px 0 20px;color:var(--dark);">Оголошення проєктів</h3>
+      
+      <!-- Projects -->
+      <h3 class="section-title">🚀 Активні проєкти</h3>
       <div class="grid-3">
-        <div class="profile-card"><h4>Проєкт дворика у Львові</h4><p class="location">Львів, приватний будинок</p><p>Потрібен дизайн концепції + підбір рослин. Бюджет — 30 000 ₴.</p><button class="btn btn-outline">Відгукнутись</button></div>
-        <div class="profile-card"><h4>Догляд за садом 6 соток</h4><p class="location">Київ, Оболонь</p><p>Щомісячний догляд газону та чагарників. Оплата домовлена.</p><button class="btn btn-outline">Відгукнутись</button></div>
-        <div class="profile-card"><h4>Онлайн-консультація: дренаж</h4><p class="location">Онлайн</p><p>Потрібна порада щодо дренажу на ділянці.</p><button class="btn btn-outline">Відгукнутись</button></div>
+        <div class="profile-card">
+          <h4 style="color:var(--dark);margin-bottom:12px;">Проєкт дворика у Львові</h4>
+          <p class="location">📍 Львів, приватний будинок</p>
+          <p style="margin:12px 0;">Потрібен дизайн концепції + підбір рослин для невеликого дворика. Бюджет — 30 000 ₴.</p>
+          <div style="display:flex;gap:8px;margin:12px 0;">
+            <span class="badge" style="background:#e8f5e8;color:var(--green);">Терміново</span>
+            <span class="badge" style="background:#f0f0f0;color:var(--dark);">30k ₴</span>
+          </div>
+          <button class="btn btn-outline">Відгукнутись</button>
+        </div>
+        <div class="profile-card">
+          <h4 style="color:var(--dark);margin-bottom:12px;">Догляд за садом 6 соток</h4>
+          <p class="location">📍 Київ, Оболонський район</p>
+          <p style="margin:12px 0;">Щомісячний догляд газону та чагарників. Потрібен надійний фахівець.</p>
+          <div style="display:flex;gap:8px;margin:12px 0;">
+            <span class="badge" style="background:#e8f5e8;color:var(--green);">Довгостроково</span>
+            <span class="badge" style="background:#f0f0f0;color:var(--dark);">6 соток</span>
+          </div>
+          <button class="btn btn-outline">Відгукнутись</button>
+        </div>
+        <div class="profile-card">
+          <h4 style="color:var(--dark);margin-bottom:12px;">Онлайн-консультація: дренаж</h4>
+          <p class="location">📍 Онлайн консультація</p>
+          <p style="margin:12px 0;">Потрібна експертна порада щодо системи дренажу на проблемній ділянці.</p>
+          <div style="display:flex;gap:8px;margin:12px 0;">
+            <span class="badge" style="background:#e8f5e8;color:var(--green);">Онлайн</span>
+            <span class="badge" style="background:#f0f0f0;color:var(--dark);">1-2 години</span>
+          </div>
+          <button class="btn btn-outline">Відгукнутись</button>
+        </div>
+      </div>
+      
+      <!-- Newsletter signup -->
+      <div style="background:#fff;padding:48px;border-radius:16px;margin-top:60px;text-align:center;box-shadow:var(--shadow);">
+        <h3 style="color:var(--dark);margin-bottom:16px;">Залишайтесь в курсі новин</h3>
+        <p style="color:#666;margin-bottom:24px;">Отримуйте останні новини про курси, проєкти та можливості в ландшафтному дизайні</p>
+        <form style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:400px;margin:0 auto;">
+          <input type="email" placeholder="Ваш email" style="flex:1;min-width:200px;padding:12px;border:2px solid #e5e5e5;border-radius:8px;">
+          <button class="btn btn-primary">Підписатись</button>
+        </form>
       </div>
     </div>
   </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer style="background:var(--dark);color:#fff;padding:60px 0 30px;">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-bottom:40px;">
+        <div>
+          <h3 style="color:#fff;margin-bottom:20px;">LANDSCAPER Academy</h3>
+          <p style="color:#ccc;line-height:1.6;">Професійна освіта в галузі ландшафтного дизайну для всіх, хто прагне створювати красиві простори.</p>
+        </div>
+        <div>
+          <h4 style="color:#fff;margin-bottom:16px;">Навчання</h4>
+          <ul style="list-style:none;color:#ccc;">
+            <li style="margin-bottom:8px;"><a href="#" style="color:#ccc;text-decoration:none;">Курси</a></li>
+            <li style="margin-bottom:8px;"><a href="#" style="color:#ccc;text-decoration:none;">Сертифікація</a></li>
+            <li style="margin-bottom:8px;"><a href="#" style="color:#ccc;text-decoration:none;">Майстер-класи</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color:#fff;margin-bottom:16px;">Спільнота</h4>
+          <ul style="list-style:none;color:#ccc;">
+            <li style="margin-bottom:8px;"><a href="#" style="color:#ccc;text-decoration:none;">Фахівці</a></li>
+            <li style="margin-bottom:8px;"><a href="#" style="color:#ccc;text-decoration:none;">Проєкти</a></li>
+            <li style="margin-bottom:8px;"><a href="#" style="color:#ccc;text-decoration:none;">Форум</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color:#fff;margin-bottom:16px;">Контакти</h4>
+          <p style="color:#ccc;margin-bottom:8px;">📧 info@landscaper.academy</p>
+          <p style="color:#ccc;margin-bottom:8px;">📞 +38 (050) 123-45-67</p>
+          <p style="color:#ccc;">📍 Київ, Україна</p>
+        </div>
+      </div>
+      <div style="border-top:1px solid #333;padding-top:20px;text-align:center;color:#999;">
+        <p>&copy; 2024 LANDSCAPER Academy. Всі права захищені.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling to sections
+    function scrollToSection(sectionId) {
+      const element = document.getElementById(sectionId);
+      element.scrollIntoView({ behavior: 'smooth' });
+      
+      // Update active nav item
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.classList.remove('active');
+      });
+      document.querySelector(`a[href="#${sectionId}"]`).classList.add('active');
+    }
+
+    // Dashboard lesson selection
+    function selectLesson(element) {
+      if (element.classList.contains('locked')) return;
+      
+      document.querySelectorAll('.lesson-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+
+    // Lesson navigation
+    function selectLessonNav(element) {
+      if (element.classList.contains('locked')) return;
+      
+      document.querySelectorAll('.lesson-link').forEach(link => {
+        link.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+
+    // Dashboard section switching
+    function showSection(sectionName) {
+      console.log('Switching to section:', sectionName);
+      // Here you would implement section switching logic
+    }
+
+    // Community filters
+    function filterProfiles() {
+      console.log('Filtering profiles...');
+      // Here you would implement filtering logic
+    }
+
+    function searchProfiles() {
+      console.log('Searching profiles...');
+      // Here you would implement search logic
+    }
+
+    // Intersection Observer for navigation highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${entry.target.id}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Add click handlers for interactive elements
+    document.addEventListener('DOMContentLoaded', function() {
+      // Course cards hover effect
+      document.querySelectorAll('.course-card').forEach(card => {
+        card.addEventListener('click', function() {
+          console.log('Course card clicked:', card.querySelector('h3').textContent);
+        });
+      });
+
+      // Profile cards hover effect
+      document.querySelectorAll('.profile-card').forEach(card => {
+        card.addEventListener('click', function() {
+          console.log('Profile card clicked:', card.querySelector('h3')?.textContent);
+        });
+      });
+
+      // Video placeholder click
+      document.querySelectorAll('.video-placeholder').forEach(video => {
+        video.addEventListener('click', function() {
+          console.log('Video player clicked');
+          // Here you would implement video player logic
+        });
+      });
+    });
+  </script>
 </body>
 </html>
