@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LANDSCAPER Academy — повний wireframe</title>
+  <title>LANDSCAPER Academy — повний wireframe</title>
   <style>
     /* === RESET & VARIABLES === */
     *{margin:0;padding:0;box-sizing:border-box;}
@@ -24,16 +24,14 @@
     .nav-menu a{text-decoration:none;color:var(--dark);font-weight:500;}
     .nav-menu a.active{color:var(--orange);}  
 
-    /* GRIDS */
+    /* GRIDS & CARDS */
     .grid-3{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
     .profile-grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
-
-    /* CARDS */
     .course-card,.profile-card{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;}
     .avatar{width:100%;height:140px;background:#eaeaea;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:48px;}
     .rating{color:var(--orange);} .rating small{font-size:12px;color:#666;}
 
-    /* === DASHBOARD POLISHED === */
+    /* DASHBOARD */
     .dashboard{background:var(--light);padding:80px 0;}
     .dashboard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;}
     .dashboard-wrapper{display:flex;min-height:520px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}  
@@ -52,6 +50,22 @@
     .lesson-item.locked{opacity:.5;cursor:not-allowed;}
     .video-placeholder{width:100%;height:320px;background:#000;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:24px 0;font-size:22px;}
 
+    /* LESSON PAGE */
+    .lesson{padding:80px 0;}
+    .breadcrumb{font-size:14px;color:#666;margin-bottom:24px;}
+    .lesson-wrapper{display:flex;gap:32px;}
+    .lesson-sidebar{width:260px;background:var(--light);padding:24px;border:1px solid #e5e5e5;border-radius:10px;flex-shrink:0;box-shadow:var(--shadow);}  
+    .lesson-sidebar h3{font-size:18px;margin-bottom:12px;}
+    .lesson-nav{list-style:none;display:flex;flex-direction:column;gap:10px;}
+    .lesson-link{padding:10px;border-left:4px solid #ddd;background:#fff;border-radius:6px;font-size:14px;cursor:pointer;transition:.2s;}
+    .lesson-link:hover{background:#f6f6f6;}
+    .lesson-link.active{border-color:var(--orange);font-weight:600;}
+    .lesson-link.locked{opacity:.5;cursor:not-allowed;}
+    .lesson-content{flex:1;padding:0 8px;}
+    .homework-form{display:flex;flex-direction:column;gap:12px;margin-top:16px;max-width:420px;}
+    .homework-form input{border:1px solid #ccc;padding:10px;border-radius:6px;}
+    .material-link{color:var(--orange);text-decoration:none;}
+
     /* MARKETPLACE */
     .filter-bar{display:flex;gap:20px;margin-bottom:30px;flex-wrap:wrap;}
     .filter-bar select,.filter-bar input{padding:10px;border:1px solid #ddd;border-radius:6px;flex:1;min-width:180px;}
@@ -62,6 +76,9 @@
       .sidebar{width:100%;flex-direction:row;overflow-x:auto;padding:16px;}
       .sidebar ul{flex-direction:row;gap:24px;margin:0;}
       .main{padding:32px 24px;}
+      .lesson-wrapper{flex-direction:column;}
+      .lesson-sidebar{width:100%;display:flex;flex-direction:row;overflow-x:auto;}
+      .lesson-nav{flex-direction:row;gap:20px;}
     }
   </style>
 </head>
@@ -148,11 +165,39 @@
     </div>
   </section>
 
-  <!-- ================= LESSON PAGE (placeholder) ================= -->
-  <section id="lesson" style="padding:80px 0;">
-    <div class="container"><h2>Сторінка уроку (у розробці)</h2></div>
+  <!-- ================= LESSON PAGE POLISHED ================= -->
+  <section id="lesson" class="lesson">
+    <div class="container">
+      <nav class="breadcrumb">Курси &gt; Основи ландшафтного дизайну &gt; Урок 2</nav>
+      <div class="lesson-wrapper">
+        <!-- Sidebar with lessons -->
+        <aside class="lesson-sidebar">
+          <h3>Зміст курсу</h3>
+          <ul class="lesson-nav">
+            <li class="lesson-link">Урок 1: Вступ</li>
+            <li class="lesson-link active">Урок 2: Композиція</li>
+            <li class="lesson-link">Урок 3: Рослини</li>
+            <li class="lesson-link locked">Урок 4: Фінал</li>
+          </ul>
+          <!-- Telegram-чат: кнопка підключення -->
+          <button class="btn btn-outline" style="margin-top:24px;">Відкрити чат</button>
+        </aside>
+        <!-- Lesson content -->
+        <div class="lesson-content">
+          <h2>Урок 2: Композиція в ландшафтному дизайні</h2>
+          <div class="video-placeholder">Відео-плеєр</div>
+          <p><a href="#" class="material-link">Завантажити презентацію (PDF)</a></p>
+          <h3 style="margin-top:32px;">Домашнє завдання</h3>
+          <p>Проаналізуйте композицію вашої ділянки та запропонуйте три покращення.</p>
+          <form class="homework-form">
+            <label>Додати файл відповіді:</label>
+            <input type="file">
+            <button class="btn btn-primary">Надіслати</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </section>
-
   <!-- ================= MARKETPLACE ================= -->
   <section id="marketplace" style="background:var(--light);padding:80px 0;">
     <div class="container">
